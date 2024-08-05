@@ -35,7 +35,7 @@ COPY --from=apache/beam_python3.10_sdk:2.57.0 /opt/apache/beam /opt/apache/beam
 
 # Copy Flex Template launcher binary from the launcher image, which makes it
 # possible to use the image as a Flex Template base image.
-COPY --from=gcr.io/dataflow-templates-base/python310-template-launcher-base:20240506_rc00 /opt/google/dataflow/python_template_launcher /opt/google/dataflow/python_template_launcher
+COPY --from=gcr.io/dataflow-templates-base/python310-template-launcher-base:20240506-rc00 /opt/google/dataflow/python_template_launcher /opt/google/dataflow/python_template_launcher
 
 # Location to store the pipeline artifacts.
 ARG WORKDIR=/template
