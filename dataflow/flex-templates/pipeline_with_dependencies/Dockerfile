@@ -30,12 +30,12 @@ FROM python:3.10-slim
 
 # Copy SDK entrypoint binary from Apache Beam image, which makes it possible to
 # use the image as SDK container image. If you explicitly depend on
-# apache-beam in setup.py, use the same version of Beam in both files.
+# apache-beam in setup.py, use the same version of Beam in both files. 
 COPY --from=apache/beam_python3.10_sdk:2.54.0 /opt/apache/beam /opt/apache/beam
 
 # Copy Flex Template launcher binary from the launcher image, which makes it
 # possible to use the image as a Flex Template base image.
-COPY --from=gcr.io/dataflow-templates-base/python311-template-launcher-base:20230622_RC00 /opt/google/dataflow/python_template_launcher /opt/google/dataflow/python_template_launcher
+COPY --from=gcr.io/dataflow-templates-base/python310-template-launcher-base:20240506_rc00 /opt/google/dataflow/python_template_launcher /opt/google/dataflow/python_template_launcher
 
 # Location to store the pipeline artifacts.
 ARG WORKDIR=/template
