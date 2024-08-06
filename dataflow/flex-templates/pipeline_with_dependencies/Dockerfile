@@ -66,6 +66,9 @@ ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/main.py"
 # to reduce pipeline submission time.
 # Similarly, since we already installed the pipeline package,
 # we don't have to specify the FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py" configuration option.
+RUN apt update -y \
+        && apt upgrade -y
+RUN pip3 install --upgrade pip setuptools
 
 # Optionally, verify that dependencies are not conflicting.
 # A conflict may or may not be significant for your pipeline.
