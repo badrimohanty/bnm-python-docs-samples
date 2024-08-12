@@ -31,7 +31,7 @@ FROM python:3.10-slim
 # Copy SDK entrypoint binary from Apache Beam image, which makes it possible to
 # use the image as SDK container image. If you explicitly depend on
 # apache-beam in setup.py, use the same version of Beam in both files. 
-COPY --from=apache/beam_python3.10_sdk:2.57.0 /opt/apache/beam /opt/apache/beam
+COPY --from=apache/beam_python3.10_sdk:2.58.0 /opt/apache/beam /opt/apache/beam
 
 # Copy Flex Template launcher binary from the launcher image, which makes it
 # possible to use the image as a Flex Template base image.
@@ -53,8 +53,8 @@ COPY my_package my_package
 
 #RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade pip
-RUN apt-get install default-jdk -y
-RUN pip install apache-beam[gcp]==2.57.0
+#RUN apt-get install default-jdk -y
+RUN pip install apache-beam[gcp]==2.58.0
 
 # Installing the pipeline package makes all modules encompassing the pipeline
 # available via import statements and installs necessary dependencies.
@@ -71,9 +71,10 @@ ENV FLEX_TEMPLATE_PYTHON_PY_FILE="${WORKDIR}/main.py"
 # to reduce pipeline submission time.
 # Similarly, since we already installed the pipeline package,
 # we don't have to specify the FLEX_TEMPLATE_PYTHON_SETUP_FILE="${WORKDIR}/setup.py" configuration option.
-RUN apt update -y \
-        && apt upgrade -y
-RUN pip3 install --upgrade pip setuptools requests
+
+#RUN apt update -y \
+#        && apt upgrade -y
+#RUN pip3 install --upgrade pip setuptools requests
 
 # Optionally, verify that dependencies are not conflicting.
 # A conflict may or may not be significant for your pipeline.
