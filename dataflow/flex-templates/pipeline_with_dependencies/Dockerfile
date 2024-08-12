@@ -26,16 +26,16 @@
 # but does not include some preinstalled libraries, like google-cloud-debugger.
 # To use a standard image, use apache/beam_python3.11_sdk:2.57.0 instead.
 # Use consistent versions of Python interpreter in the project.
-FROM python:3.10-slim
+FROM python:3.9-slim
 
 # Copy SDK entrypoint binary from Apache Beam image, which makes it possible to
 # use the image as SDK container image. If you explicitly depend on
 # apache-beam in setup.py, use the same version of Beam in both files. 
-COPY --from=apache/beam_python3.10_sdk:2.57.0 /opt/apache/beam /opt/apache/beam
+COPY --from=apache/beam_python3.9_sdk:2.58.0 /opt/apache/beam /opt/apache/beam
 
 # Copy Flex Template launcher binary from the launcher image, which makes it
 # possible to use the image as a Flex Template base image.
-COPY --from=gcr.io/dataflow-templates-base/python310-template-launcher-base:20240506-rc00 /opt/google/dataflow/python_template_launcher /opt/google/dataflow/python_template_launcher
+COPY --from=gcr.io/dataflow-templates-base/python39-template-launcher-base:20240506-rc00 /opt/google/dataflow/python_template_launcher /opt/google/dataflow/python_template_launcher
 
 # Location to store the pipeline artifacts.
 ARG WORKDIR=/template
@@ -54,7 +54,7 @@ COPY my_package my_package
 #RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade pip
 #RUN apt-get install default-jdk -y
-RUN pip install apache-beam[gcp]==2.57.0
+RUN pip install apache-beam[gcp]==2.58.0
 
 # Installing the pipeline package makes all modules encompassing the pipeline
 # available via import statements and installs necessary dependencies.
