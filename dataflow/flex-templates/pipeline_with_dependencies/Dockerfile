@@ -49,7 +49,12 @@ COPY my_package my_package
 # Installing exhaustive list of dependencies from a requirements.txt
 # helps to ensure that every time Docker container image is built,
 # the Python dependencies stay the same. Using `--no-cache-dir` reduces image size.
-RUN pip install --no-cache-dir -r requirements.txt
+
+
+#RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip
+RUN apt-get install default-jdk -y
+RUN pip install apache-beam[gcp]==2.57.0
 
 # Installing the pipeline package makes all modules encompassing the pipeline
 # available via import statements and installs necessary dependencies.
